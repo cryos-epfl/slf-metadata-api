@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SLF pro comp archetype</title>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+
+</head>
+
+<body>
+	<h1>SLF pro avalanche REST sdbo-api</h1>
+
+	<script>
+		//on document ready
+		$(document).ready(function(){
+			$.getJSON( "info", function( data ) {
+				  var items = [];
+				  $.each( data, function( key, val ) {
+					items.push("<tr><td>" + key.charAt(0).toUpperCase() + key.slice(1) + ":</td><td>"  + val + "</td></tr>");
+				  });
+		   		 $("#table").prepend(items);
+				});
+		});
+	</script>
+
+	<table id="table">
+		<tr>
+			<td>REST interface documentation:</td>
+			<td><a href="swagger-ui.html">Swagger-ui</a></td>
+		</tr>
+	</table>
+
+</body>
+</html>
+

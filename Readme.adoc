@@ -1,0 +1,143 @@
+= Archetype Readme
+
+
+== Running your application
+
+=== Running from command line
+
+....
+mvn spring-boot:run -Drun.arguments="--external.hostname=linux38.wsl.ch,--server.port=8320, \
+	--server.context-path=/component,--spring.profiles.active=local"
+....
+
+=== Running from Eclipse
+ 
+Program arguments:
+....
+--external.hostname=linux38.wsl.ch
+--server.port=8320
+--server.context-path=/component
+....
+
+VM arguments:
+....
+-Dspring.profiles.active=local
+....
+
+== External configuration
+
+It is possible to add external configuration files by defining a configuration location as start parameter. +
+....
+ -Dspring.config.location=/home/webapp/config/8330-prodata/
+.... 
+
+If this location contains logback configuration (logback.xml), this file is used to configure the logging.
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<property name="LOG_PATH" value="${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}" />
+
+<!-- Appenders -->
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n
+			</Pattern>
+		</encoder>
+	</appender>
+
+  	<appender name="infoAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/data-info.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_PATH}/aval-info.log.%d{yyyy-MM-dd}</FileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter> 	    
+  	</appender>	
+
+  	<appender name="debugAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/data-debug.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_PATH}/aval-debug.log.%d{yyyy-MM-dd}</FileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>DEBUG</level>
+		</filter>  	    
+  	</appender>
+  	
+	<appender name="errorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/data-error.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_PATH}/aval-error.log.%d{yyyy-MM-dd}</FileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>  	 	    
+  	</appender>
+  	
+  	<appender name="requestLoggingAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${LOG_PATH}/data-access.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${LOG_PATH}/aval-access.log.%d{yyyy-MM-dd}</FileNamePattern>
+			<maxHistory>30</maxHistory>			
+		</rollingPolicy>
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n</Pattern>
+		</encoder> 	    
+  	</appender>
+  	
+<!-- Loggers -->  	
+	<logger name="ch.slf.pro.data" additivity="false">
+	    <level value="DEBUG" />
+		<appender-ref ref="infoAppender"/>
+		<appender-ref ref="debugAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</logger>
+	
+	<logger name="ch.slf.pro" additivity="false">
+	    <level value="INFO" />
+		<appender-ref ref="infoAppender"/>
+		<appender-ref ref="debugAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</logger>
+	
+	<logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" additivity="false">
+	    <level value="DEBUG" />
+		<appender-ref ref="requestLoggingAppender"/>
+	</logger>
+	
+	<logger name="org.hibernate.SQL" additivity="false">
+	    <level value="INFO" />
+		<appender-ref ref="infoAppender"/>
+		<appender-ref ref="debugAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</logger>
+
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="infoAppender"/>
+		<appender-ref ref="debugAppender"/>
+		<appender-ref ref="errorAppender"/>
+	</root>
+</included>
+----
+
+
+== Extended documentation
+
+* http://docuwis.wsl.ch/wis-docu//wisdocu/projects/slfpro/common/util/exceptionhandling/[Exception handling]
+* http://docuwis.wsl.ch/wis-docu//wisdocu/standalone-html/validation.html[Validation]

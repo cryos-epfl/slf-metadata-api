@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+	 <define name="INCLUDED_FILE_EXISTS" 
+                class="ch.qos.logback.core.property.FileExistsPropertyDefiner">
+      	<path>${spring.config.location}/logback.xml</path>
+   	 </define>
+
+ 	<if condition='property("INCLUDED_FILE_EXISTS").equals("true")'>
+ 		
+ 		<!-- Use external configuration if configuration file exists -->
+           <then>
+           		<include file="${spring.config.location}/logback.xml"/>
+           </then>
+           <else>
+            <!-- Appenders -->  	
+				<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+					<encoder>
+						<Pattern>.%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</Pattern>
+					</encoder>
+				</appender>
+			  	
+			<!-- Loggers -->  	
+				<logger name="ch.slf.pro.sdbo-api" additivity="false">
+				    <level value="DEBUG" />
+					<appender-ref ref="consoleAppender"/>
+				</logger>
+				
+				<logger name="ch.slf.pro" additivity="false">
+				    <level value="DEBUG" />
+					<appender-ref ref="consoleAppender"/>
+				</logger>
+				
+				<logger name="org.springframework.web.filter.CommonsRequestLoggingFilter" additivity="false">
+				    <level value="ERROR" />
+					<appender-ref ref="consoleAppender"/>
+				</logger>
+				
+				<logger name="org.hibernate.SQL" additivity="false">
+				    <level value="DEBUG" />
+					<appender-ref ref="consoleAppender"/>
+				</logger>
+			
+				<root>
+					<level value="INFO" />
+					<appender-ref ref="consoleAppender"/>
+				</root>
+           </else>
+    </if>
+</configuration>
