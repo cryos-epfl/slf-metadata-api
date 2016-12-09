@@ -1,24 +1,16 @@
 package ch.epfl.cryos.osper.service;
 
 import ch.epfl.cryos.osper.model.Station;
-import ch.epfl.cryos.osper.model.StationId;
-import ch.epfl.cryos.osper.model.Timeserie;
-import ch.epfl.cryos.osper.model.TimeserieBuilder;
 import ch.epfl.cryos.osper.repository.StationMetadataRepository;
 import ch.epfl.cryos.osper.repository.StationNameResolver;
-import ch.epfl.cryos.osper.repository.TimeserieRepository;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Range;
+import org.apache.commons.lang3.StringUtils;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
-import org.geojson.Point;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.time.*;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.TimeZone;
 
 /**
  * Created by kryvych on 19/10/16.
@@ -39,11 +31,16 @@ public class StationMetadataSerivce {
         this.nameResolver = nameResolver;
     }
 
-    public FeatureCollection getStations() {
+    public FeatureCollection getStations(String network) {
 
-        List<Station> all = metadataRepository.findAll();
+        List<Station> stations = null;
+        if (StringUtils.isEmpty(network)) {
+            stations = metadataRepository.findAll();
+        } else {
+            stations = metadataRepository.findByNetworkCuatom(network.toUpperCase());
+        }
 
-        return featureBuilder.buildFeatureCollection(all);
+        return featureBuilder.buildFeatureCollection(stations);
     }
 
     public Feature getStationInfo(String stationName) {

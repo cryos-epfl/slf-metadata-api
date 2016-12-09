@@ -46,8 +46,8 @@ public class StationMetadataController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get data", notes = "Returns station metadata in GeoJSON format. ", response = String.class)
 
-    public FeatureCollection getAllStations() {
-        return service.getStations();
+    public FeatureCollection getAllStations(@RequestParam(value = "network", required=false) String network) {
+        return service.getStations(network);
     }
 
 

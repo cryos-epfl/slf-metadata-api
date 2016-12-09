@@ -44,7 +44,7 @@ public class NetworkRepository {
     }
 
     public List<String> getNetworks() {
-        return jdbcTemplate.query("select netz from data_quality.sdbo_station2_vstationstandort where netz is not NULL ",
+        return jdbcTemplate.query("select distinct netz from data_quality.sdbo_station2_vstationstandort where netz is not NULL ",
                 (resultSet, i) -> {
                     return resultSet.getString("netz");
                 });
