@@ -1,10 +1,9 @@
 package ch.epfl.cryos.osper.controller;
 
 import ch.epfl.cryos.osper.ApplicationFields;
+import ch.epfl.cryos.osper.model.Network;
 import ch.epfl.cryos.osper.service.NetworkService;
 import ch.epfl.cryos.osper.service.StationMetadataSerivce;
-import ch.epfl.cryos.osper.util.Profile;
-import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,9 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kryvych on 30/09/16.
@@ -27,9 +24,9 @@ import java.util.Map;
 @RestController
 @RequestMapping(ApplicationFields.REST_METADATA)
 @Api(value = "Controller for accessing station metadata data")
-public class StationMetadataController {
+public class StationController {
 
-    private static final Logger log = LoggerFactory.getLogger(StationMetadataController.class);
+    private static final Logger log = LoggerFactory.getLogger(StationController.class);
 
     @Autowired
     private StationMetadataSerivce service;
@@ -39,7 +36,6 @@ public class StationMetadataController {
 
 
     @ResponseStatus(value = HttpStatus.OK)
-    @JsonView(Profile.ListView.class)
     @RequestMapping(
             value = "stations",
             method = RequestMethod.GET,
@@ -51,17 +47,30 @@ public class StationMetadataController {
     }
 
 
+//    @ResponseStatus(value = HttpStatus.OK)
+//    @RequestMapping(
+//            value = "stations/{stationName}",
+//            method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    @ApiOperation(value = "Get data", notes = "Returns station metadata in GeoJSON format. ", response = String.class)
+//
+//    public Feature getStationInfo(
+//            @PathVariable(value = "stationName") @ApiParam(value = "Station name composed like network:stationName:stationNumber", required = true) String stationName
+//    ) {
+//        return service.getStationInfo(stationName);
+//    }
+
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(
-            value = "stations/{stationName}",
+            value = "stations/{stationId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get data", notes = "Returns station metadata in GeoJSON format. ", response = String.class)
 
     public Feature getStationInfo(
-            @PathVariable(value = "stationName") @ApiParam(value = "Station name composed like network:stationName:stationNumber", required = true) String stationName
+            @PathVariable(value = "stationId") @ApiParam(value = "Station id", required = true) Long stationId
     ) {
-        return service.getStationInfo(stationName);
+        return service.getStationInfo(stationId);
     }
 
     @ResponseStatus(value = HttpStatus.OK)
@@ -71,31 +80,23 @@ public class StationMetadataController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get data", notes = "Returns network names. ", response = String.class)
 
-    public List<String> getAllNetworks() {
+    public List<Network> getAllNetworks() {
         return networkService.getNetworks();
     }
 
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(
-            value = "networks/stations",
+            value = "networks/{network}/stations",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get data", notes = "Returns networks with a list of their stations. ", response = String.class)
 
-    public Map<String, Collection<String>> getNetworksWithStations() {
-        return networkService.getNetWorksWithStations();
+    public FeatureCollection getNetworksWithStations(
+            @PathVariable(value = "network") @ApiParam(value = "Network code", required = true) String network
+    ) {
+        return service.getStations(network);
     }
 
 
-    @ResponseStatus(value = HttpStatus.OK)
-    @RequestMapping(
-            value = "networks/parameters",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Get data", notes = "Returns networks with a measured parameters. ", response = String.class)
-
-    public Map<String, List<String>> getNetworksWithParameters() {
-        return networkService.getNetWorksWithParameters();
-    }
 
 }

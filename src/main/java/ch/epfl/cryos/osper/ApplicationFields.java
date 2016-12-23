@@ -3,8 +3,6 @@ package ch.epfl.cryos.osper;
 import java.time.ZoneId;
 import java.util.TimeZone;
 
-import ch.slf.pro.common.util.geo.OracleCrsSridMap;
-
 /**
  * Contains global application definition fields (constants).
  *
@@ -22,10 +20,8 @@ public class ApplicationFields {
             "ch.epfl.cryos.osper.configuration,"
                     + "ch.epfl.cryos.osper.controller,"
                     + "ch.epfl.cryos.osper.repository,"
-                    + "ch.epfl.cryos.osper.service,"
-                    + "ch.epfl.cryos.osper.dao,"
-                    + "ch.epfl.cryos.osper.exception,"
-                    + "ch.epfl.cryos.osper.validator"
+                    + "ch.epfl.cryos.osper.service"
+
             ;
 
     public static final String[] MODEL_SCAN_PACKAGES = {"ch.epfl.cryos.osper.model"};

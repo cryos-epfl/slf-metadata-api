@@ -1,20 +1,18 @@
 package ch.epfl.cryos.osper.configuration;
 
-import ch.epfl.cryos.osper.util.TimeRangeSerializer;
-import ch.slf.pro.common.util.converter.ConverterConfiguration;
 import ch.slf.pro.common.util.exception.handler.demo.ExceptionDemoConfig;
 import ch.slf.pro.common.util.servlet.LogReqIdRequestListener;
 import ch.slf.pro.common.util.validator.PropertyValidator;
 import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.google.common.collect.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -144,10 +142,6 @@ public class BeanConfiguration {
 
     }
 
-    @Autowired
-    public void configJackson(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
-        jackson2ObjectMapperBuilder.serializerByType(Range.class, new TimeRangeSerializer());
-    }
 
 
 }

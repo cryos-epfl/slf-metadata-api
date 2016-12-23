@@ -1,10 +1,8 @@
 package ch.epfl.cryos.osper.controller;
 
-import java.time.ZonedDateTime;
-import java.util.Properties;
-
-import javax.annotation.PostConstruct;
-
+import ch.epfl.cryos.osper.ApplicationFields;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -14,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import ch.epfl.cryos.osper.ApplicationFields;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import javax.annotation.PostConstruct;
+import java.util.Properties;
 
 /**
  * Controller to get some information about this sdbo-api

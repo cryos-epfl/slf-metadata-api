@@ -1,14 +1,12 @@
 package ch.epfl.cryos.osper.service;
 
+import ch.epfl.cryos.osper.model.Network;
 import ch.epfl.cryos.osper.repository.NetworkRepository;
-import ch.epfl.cryos.osper.repository.TimeserieRepository;
-import com.google.common.collect.Maps;
+import ch.epfl.cryos.osper.repository.StationMetadataRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by kryvych on 21/11/16.
@@ -17,30 +15,18 @@ import java.util.Map;
 public class NetworkService {
 
     private final NetworkRepository networkRepository;
-
-    private final TimeserieRepository timeserieRepository;
+    private final StationMetadataRepository stationMetadataRepository;
 
     @Inject
-    public NetworkService(NetworkRepository networkRepository, TimeserieRepository timeserieRepository) {
+    public NetworkService(NetworkRepository networkRepository, StationMetadataRepository stationMetadataRepository) {
         this.networkRepository = networkRepository;
-        this.timeserieRepository = timeserieRepository;
+        this.stationMetadataRepository = stationMetadataRepository;
     }
 
-    public Map<String, Collection<String>> getNetWorksWithStations() {
-        return networkRepository.getAllNetworksWithStations();
+
+    public List<Network> getNetworks() {
+        return networkRepository.findAll();
     }
 
-    public List<String> getNetworks() {
-        return networkRepository.getNetworks();
-    }
-
-    public Map<String, List<String>> getNetWorksWithParameters() {
-        Map<String, List<String>> result = Maps.newHashMap();
-        List<String> networks = networkRepository.getNetworks();
-        for (String network : networks) {
-            result.put(network, timeserieRepository.getMeasurandDescriptionByNetwork(network));
-        }
-        return result;
-    }
 
 }

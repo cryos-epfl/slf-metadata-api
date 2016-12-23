@@ -6,27 +6,28 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by kryvych on 19/10/16.
  */
 @Entity
-@IdClass(StationId.class)
-@Table(name = "sdbo_station2_vstationstandort", schema = ApplicationFields.SCHEMA)
+@Table(name = "v_station", schema = ApplicationFields.SCHEMA)
 public class Station implements Serializable {
 
     @Id
+    @NotNull
+    private long id;
+
     @Column(name = "netz")
     @NotNull
     private String network;
 
-    @Id
+
     @Column(name = "stat_abk")
     @NotNull
     private String shortName;
 
-    @Id
+
     @Column(name = "stao_nr")
     @NotNull
     private int stationNumber;
@@ -54,10 +55,11 @@ public class Station implements Serializable {
     @Column(name="stao_h")
     private Double altitude;
 
-    @Transient
-    private List<Timeserie> timeseries;
-
     private Station() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getNetwork() {
@@ -155,15 +157,7 @@ public class Station implements Serializable {
         }
     }
 
-    public List<Timeserie> getTimeseries() {
-        return timeseries;
-    }
-
-    public void setTimeseries(List<Timeserie> timeseries) {
-        this.timeseries = timeseries;
-    }
-
-    @Override
+     @Override
     public String toString() {
         return "Station{" +
                 "network='" + network + '\'' +

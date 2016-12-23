@@ -2,7 +2,6 @@ package ch.epfl.cryos.osper.service;
 
 import ch.epfl.cryos.osper.model.Station;
 import ch.epfl.cryos.osper.repository.StationMetadataRepository;
-import ch.epfl.cryos.osper.repository.StationNameResolver;
 import org.apache.commons.lang3.StringUtils;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
@@ -22,13 +21,10 @@ public class StationMetadataSerivce {
 
     private final GeoJsonFeatureBuilder featureBuilder;
 
-    private final StationNameResolver nameResolver;
-
     @Inject
-    public StationMetadataSerivce(StationMetadataRepository metadataRepository, GeoJsonFeatureBuilder featureBuilder, StationNameResolver nameResolver) {
+    public StationMetadataSerivce(StationMetadataRepository metadataRepository, GeoJsonFeatureBuilder featureBuilder) {
         this.metadataRepository = metadataRepository;
         this.featureBuilder = featureBuilder;
-        this.nameResolver = nameResolver;
     }
 
     public FeatureCollection getStations(String network) {
@@ -37,16 +33,16 @@ public class StationMetadataSerivce {
         if (StringUtils.isEmpty(network)) {
             stations = metadataRepository.findAll();
         } else {
-            stations = metadataRepository.findByNetworkCuatom(network.toUpperCase());
+            stations = metadataRepository.findByNetworkCustom(network.toUpperCase());
         }
 
         return featureBuilder.buildFeatureCollection(stations);
     }
 
-    public Feature getStationInfo(String stationName) {
-        Station station = metadataRepository.findOne(nameResolver.buildStationId(stationName));
+    public Feature getStationInfo(Long stationId) {
+        Station station = metadataRepository.findOne(stationId);
         if (station == null) {
-            throw new NoSuchElementException("Station with name " + stationName + " in not found.");
+            throw new NoSuchElementException("Station with number " + stationId + " is not found.");
         }
         return featureBuilder.buildSingleFeature(station);
     }

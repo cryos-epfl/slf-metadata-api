@@ -1,36 +1,17 @@
 package ch.epfl.cryos.osper.configuration;
 
-import static com.google.common.base.Predicates.or;
-import static springfox.documentation.builders.PathSelectors.regex;
-
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.OffsetDateTime;
-import java.time.OffsetTime;
-import java.time.Period;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-
+import ch.epfl.cryos.osper.ApplicationFields;
+import ch.slf.pro.common.util.exception.handler.*;
+import ch.slf.pro.common.util.exception.handler.tools.ExceptionTypeDocBuilder;
+import ch.slf.pro.common.util.geo.Crs;
+import ch.slf.pro.common.util.swagger.CrsSwaggerModel;
+import ch.slf.pro.common.util.swagger.GeometrySwaggerModel;
+import com.vividsolutions.jts.geom.Geometry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.vividsolutions.jts.geom.Geometry;
-
-import ch.epfl.cryos.osper.ApplicationFields;
-import ch.slf.pro.common.util.exception.handler.DataAccessExceptionType;
-import ch.slf.pro.common.util.exception.handler.ExceptionType;
-import ch.slf.pro.common.util.exception.handler.GeneralExceptionType;
-import ch.slf.pro.common.util.exception.handler.RestControllerExceptionType;
-import ch.slf.pro.common.util.exception.handler.ValidationExceptionType;
-import ch.slf.pro.common.util.exception.handler.tools.ExceptionTypeDocBuilder;
-import ch.slf.pro.common.util.geo.Crs;
-import ch.slf.pro.common.util.swagger.CrsSwaggerModel;
-import ch.slf.pro.common.util.swagger.GeometrySwaggerModel;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.schema.ModelRef;
@@ -39,6 +20,11 @@ import springfox.documentation.service.Parameter;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.time.*;
+import java.util.ArrayList;
+
+import static springfox.documentation.builders.PathSelectors.regex;
 
 /**
  * 

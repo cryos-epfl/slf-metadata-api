@@ -30,7 +30,7 @@ import ch.epfl.cryos.osper.Application;
 @ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
 @TestPropertySource(locations = { "classpath:test.properties" })
 @ActiveProfiles({ "insecure", "test" })
-public class StationMetadataControllerTest {
+public class StationControllerTest {
 
 	@Autowired
 	private WebApplicationContext context;
@@ -44,12 +44,13 @@ public class StationMetadataControllerTest {
 
 	@Test
 	public void singleStation() throws Exception {
-		this.mockMvc.perform(get("/metadata/stations/IMIS:ALI:2"))
+		this.mockMvc.perform(get("/metadata/stations/819"))
 			.andExpect(status().is2xxSuccessful())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 			.andExpect(jsonPath("$.type",equalTo("Feature")))
-			.andExpect(jsonPath("$.properties.name",equalTo("IMIS:ALI:2")))
-				.andExpect(jsonPath("$.properties.description", equalTo("Chenau (ALI2) 1716 m")));
+			.andExpect(jsonPath("$.properties.name",equalTo("BOV")))
+			.andExpect(jsonPath("$.properties.number",equalTo(2)))
+				.andExpect(jsonPath("$.properties.description", equalTo("Pointe de Toules 2700 m")));
 	}
 
 	//ToDo: add error tests
