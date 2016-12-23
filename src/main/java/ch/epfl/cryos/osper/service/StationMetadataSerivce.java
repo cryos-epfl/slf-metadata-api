@@ -2,9 +2,11 @@ package ch.epfl.cryos.osper.service;
 
 import ch.epfl.cryos.osper.model.Station;
 import ch.epfl.cryos.osper.repository.StationMetadataRepository;
+import ch.slf.pro.common.util.exception.SlfProRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -42,8 +44,8 @@ public class StationMetadataSerivce {
     public Feature getStationInfo(Long stationId) {
         Station station = metadataRepository.findOne(stationId);
         if (station == null) {
-            throw new NoSuchElementException("Station with number " + stationId + " is not found.");
-        }
+            throw  SlfProRuntimeException.builder("Station with ID " + stationId + " in not found.", "dae.noStation")
+                    .status(HttpStatus.NOT_FOUND).build();        }
         return featureBuilder.buildSingleFeature(station);
     }
 
