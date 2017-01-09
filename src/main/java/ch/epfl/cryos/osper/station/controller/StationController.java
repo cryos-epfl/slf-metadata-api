@@ -1,9 +1,9 @@
-package ch.epfl.cryos.osper.controller;
+package ch.epfl.cryos.osper.station.controller;
 
-import ch.epfl.cryos.osper.ApplicationFields;
-import ch.epfl.cryos.osper.model.Network;
-import ch.epfl.cryos.osper.service.NetworkService;
-import ch.epfl.cryos.osper.service.StationMetadataSerivce;
+import ch.epfl.cryos.osper.station.ApplicationFields;
+import ch.epfl.cryos.osper.station.model.Network;
+import ch.epfl.cryos.osper.station.service.NetworkService;
+import ch.epfl.cryos.osper.station.service.StationMetadataSerivce;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

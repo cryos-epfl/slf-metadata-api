@@ -1,4 +1,4 @@
-package ch.epfl.cryos.osper.controller;
+package ch.epfl.cryos.osper.station.controller;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import ch.epfl.cryos.osper.Application;
+import ch.epfl.cryos.osper.station.Application;
 
 
 

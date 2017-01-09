@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.repository;
+package ch.epfl.cryos.osper.station.repository;
 
-import ch.epfl.cryos.osper.model.Station;
+import ch.epfl.cryos.osper.station.model.Station;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

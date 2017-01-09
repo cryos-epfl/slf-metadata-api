@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.repository;
+package ch.epfl.cryos.osper.station.repository;
 
-import ch.epfl.cryos.osper.model.Network;
+import ch.epfl.cryos.osper.station.model.Network;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

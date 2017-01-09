@@ -1,7 +1,7 @@
-package ch.epfl.cryos.osper.service;
+package ch.epfl.cryos.osper.station.service;
 
-import ch.epfl.cryos.osper.model.Station;
-import ch.epfl.cryos.osper.repository.StationMetadataRepository;
+import ch.epfl.cryos.osper.station.model.Station;
+import ch.epfl.cryos.osper.station.repository.StationMetadataRepository;
 import ch.slf.pro.common.util.exception.SlfProRuntimeException;
 import org.apache.commons.lang3.StringUtils;
 import org.geojson.Feature;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Created by kryvych on 19/10/16.

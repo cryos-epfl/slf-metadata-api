@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.service;
+package ch.epfl.cryos.osper.station.service;
 
-import ch.epfl.cryos.osper.model.Station;
+import ch.epfl.cryos.osper.station.model.Station;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.geojson.Point;

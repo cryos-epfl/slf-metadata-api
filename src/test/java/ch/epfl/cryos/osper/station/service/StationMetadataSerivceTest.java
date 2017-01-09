@@ -1,4 +1,4 @@
-package ch.epfl.cryos.osper.service;
+package ch.epfl.cryos.osper.station.service;
 
 import junit.framework.TestCase;
 

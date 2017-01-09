@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.configuration;
+package ch.epfl.cryos.osper.station.configuration;
 
-import ch.epfl.cryos.osper.ApplicationFields;
+import ch.epfl.cryos.osper.station.ApplicationFields;
 import ch.slf.pro.common.util.exception.handler.*;
 import ch.slf.pro.common.util.exception.handler.tools.ExceptionTypeDocBuilder;
 import ch.slf.pro.common.util.geo.Crs;

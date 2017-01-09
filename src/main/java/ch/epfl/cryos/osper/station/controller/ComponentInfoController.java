@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.controller;
+package ch.epfl.cryos.osper.station.controller;
 
-import ch.epfl.cryos.osper.ApplicationFields;
+import ch.epfl.cryos.osper.station.ApplicationFields;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

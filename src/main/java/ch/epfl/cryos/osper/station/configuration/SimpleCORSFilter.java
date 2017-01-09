@@ -1,4 +1,4 @@
-package ch.epfl.cryos.osper.configuration;
+package ch.epfl.cryos.osper.station.configuration;
 
 import org.springframework.stereotype.Component;
 

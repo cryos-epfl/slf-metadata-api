@@ -1,6 +1,6 @@
-package ch.epfl.cryos.osper.model;
+package ch.epfl.cryos.osper.station.model;
 
-import ch.epfl.cryos.osper.ApplicationFields;
+import ch.epfl.cryos.osper.station.ApplicationFields;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

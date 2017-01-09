@@ -1,8 +1,8 @@
-package ch.epfl.cryos.osper.service;
+package ch.epfl.cryos.osper.station.service;
 
-import ch.epfl.cryos.osper.model.Network;
-import ch.epfl.cryos.osper.repository.NetworkRepository;
-import ch.epfl.cryos.osper.repository.StationMetadataRepository;
+import ch.epfl.cryos.osper.station.model.Network;
+import ch.epfl.cryos.osper.station.repository.NetworkRepository;
+import ch.epfl.cryos.osper.station.repository.StationMetadataRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;

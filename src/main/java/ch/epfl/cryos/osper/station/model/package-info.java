@@ -6,7 +6,7 @@
 //	@TypeDef(name="geometry", typeClass=GeometryType.class),
 //	@TypeDef(name="zonedDateTime", typeClass=PersistentZonedDateTime.class)
 //})
-package ch.epfl.cryos.osper.model;
+package ch.epfl.cryos.osper.station.model;
 
 //import org.hibernate.annotations.TypeDef;
 //import org.hibernate.annotations.TypeDefs;
