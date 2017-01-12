@@ -30,9 +30,8 @@ public class GeoJsonFeatureBuilder {
          feature.setGeometry(point);
 
          feature.setProperty("id", station.getId());
-         feature.setProperty("name", station.getShortName());
+         feature.setProperty("name", station.getShortName() + station.getStationNumber());
          feature.setProperty("network", station.getNetwork());
-         feature.setProperty("number", station.getStationNumber());
          feature.setProperty("firstMeasureDate", station.getFirstMeasureDate());
          feature.setProperty("lastMeasureDate", station.getLastMeasureDate());
          feature.setProperty("description", station.getDescription());

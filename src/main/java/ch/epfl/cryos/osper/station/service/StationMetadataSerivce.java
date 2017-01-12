@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by kryvych on 19/10/16.
@@ -28,13 +30,14 @@ public class StationMetadataSerivce {
         this.featureBuilder = featureBuilder;
     }
 
-    public FeatureCollection getStations(String network) {
+    public FeatureCollection getStations(Set<String> networks) {
 
         List<Station> stations = null;
-        if (StringUtils.isEmpty(network)) {
+        if (networks.isEmpty()) {
             stations = metadataRepository.findAll();
         } else {
-            stations = metadataRepository.findByNetworkCustom(network.toUpperCase());
+            Set<String> networksUpperCase = networks.stream().map(String::toUpperCase).collect(Collectors.toSet());
+            stations = metadataRepository.findByNetworkCustom(networksUpperCase);
         }
 
         return featureBuilder.buildFeatureCollection(stations);

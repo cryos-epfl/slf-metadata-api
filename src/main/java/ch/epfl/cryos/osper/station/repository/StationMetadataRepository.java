@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,9 +19,9 @@ public interface StationMetadataRepository extends JpaRepository<Station, Long> 
     List<Station> findAll();
 
     @Query("select s from Station s " +
-            "where s.network = :network and " +
+            "where s.network in (:networks) and " +
             "s.longitudeWgs84 is not null and s.latitudeWgs84 is not null and s.firstMeasureDate is not null")
-    List<Station> findByNetworkCustom(@Param("network") String network);
+    List<Station> findByNetworkCustom(@Param("networks") Collection<String> networks);
 
     Station findOne(Long id);
 

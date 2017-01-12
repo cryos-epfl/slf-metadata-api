@@ -38,8 +38,8 @@ public class ComponentInfoController {
 		properties.setProperty("version", env.getProperty("system.version"));
 		properties.setProperty("buildTime", env.getProperty("system.buildtime"));
 		properties.setProperty("compilerVersion", env.getProperty("system.compiler"));
-//		properties.setProperty("databaseUrl", env.getProperty("spring.datasource.url"));
-//		properties.setProperty("databaseUser", env.getProperty("spring.datasource.username"));
+		properties.setProperty("databaseUrl", env.getProperty("spring.datasource.url"));
+		properties.setProperty("databaseUser", env.getProperty("spring.datasource.username"));
 //		properties.setProperty("boottime", ZonedDateTime.now().toString());
 	}
 

@@ -4,6 +4,7 @@ import ch.epfl.cryos.osper.station.ApplicationFields;
 import ch.epfl.cryos.osper.station.model.Network;
 import ch.epfl.cryos.osper.station.service.NetworkService;
 import ch.epfl.cryos.osper.station.service.StationMetadataSerivce;
+import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by kryvych on 30/09/16.
@@ -42,8 +44,8 @@ public class StationController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Get data", notes = "Returns station metadata in GeoJSON format. ", response = String.class)
 
-    public FeatureCollection getAllStations(@RequestParam(value = "network", required=false) String network) {
-        return service.getStations(network);
+    public FeatureCollection getAllStations(@RequestParam(value = "network", required=false) Set<String> networks) {
+        return service.getStations(networks);
     }
 
 
@@ -94,7 +96,7 @@ public class StationController {
     public FeatureCollection getNetworksWithStations(
             @PathVariable(value = "network") @ApiParam(value = "Network code", required = true) String network
     ) {
-        return service.getStations(network);
+        return service.getStations(Sets.newHashSet(network));
     }
 
 
