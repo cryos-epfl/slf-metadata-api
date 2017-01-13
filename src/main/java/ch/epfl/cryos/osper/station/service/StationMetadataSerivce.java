@@ -8,8 +8,10 @@ import org.geojson.Feature;
 import org.geojson.FeatureCollection;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,8 +34,8 @@ public class StationMetadataSerivce {
 
     public FeatureCollection getStations(Set<String> networks) {
 
-        List<Station> stations = null;
-        if (networks.isEmpty()) {
+        List<Station> stations;
+        if (CollectionUtils.isEmpty(networks)) {
             stations = metadataRepository.findAll();
         } else {
             Set<String> networksUpperCase = networks.stream().map(String::toUpperCase).collect(Collectors.toSet());
