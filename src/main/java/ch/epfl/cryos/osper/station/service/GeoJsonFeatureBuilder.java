@@ -6,6 +6,8 @@ import org.geojson.FeatureCollection;
 import org.geojson.Point;
 
 import javax.inject.Named;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @Named
 public class GeoJsonFeatureBuilder {
+
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
     public GeoJsonFeatureBuilder() {
     }
@@ -24,24 +28,21 @@ public class GeoJsonFeatureBuilder {
         return features;
     }
 
-     Feature buildSingleFeature(Station station) {
-         Feature feature = new Feature();
-         Point point = new Point(station.getLongitudeWgs84(), station.getLatitudeWgs84(), station.getAltitude());
-         feature.setGeometry(point);
+    Feature buildSingleFeature(Station station) {
+        Feature feature = new Feature();
+        Point point = new Point(station.getLongitudeWgs84(), station.getLatitudeWgs84(), station.getAltitude());
+        feature.setGeometry(point);
 
-         feature.setProperty("id", station.getId());
-         feature.setProperty("name", station.getShortName() + station.getStationNumber());
-         feature.setProperty("network", station.getNetwork());
-         feature.setProperty("firstMeasureDate", station.getFirstMeasureDate());
-         feature.setProperty("lastMeasureDate", station.getLastMeasureDate());
-         feature.setProperty("description", station.getDescription());
-         feature.setProperty("locationName", station.getLocationName());
+        feature.setProperty("id", station.getId());
+        feature.setProperty("name", station.getCode());
+        feature.setProperty("network", station.getNetwork());
+        feature.setProperty("firstMeasureDate", station.getFirstMeasureDate() != null ? dateFormat.format(station.getFirstMeasureDate()) : null);
+        feature.setProperty("lastMeasureDate", station.getLastMeasureDate() != null ? dateFormat.format(station.getLastMeasureDate()) : null);
+        feature.setProperty("description", station.getDescription());
+        feature.setProperty("locationName", station.getLocationName());
 
-         return feature;
+        return feature;
     }
-
-
-
 
 
 }

@@ -18,6 +18,10 @@ public class Station implements Serializable {
     @NotNull
     private long id;
 
+    @Column(name = "code")
+    @NotNull
+    private String code;
+
     @Column(name = "netz")
     @NotNull
     private String network;
@@ -138,6 +142,14 @@ public class Station implements Serializable {
 
     public void setLatitudeWgs84(double latitudeWgs84) {
         this.latitudeWgs84 = latitudeWgs84;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public double getAltitude() {
