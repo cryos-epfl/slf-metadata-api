@@ -15,12 +15,12 @@ import java.util.List;
 @Repository
 public interface StationMetadataRepository extends JpaRepository<Station, Long> {
 
-    @Query("select s from Station s where s.longitudeWgs84 is not null and s.latitudeWgs84 is not null and s.firstMeasureDate is not null")
+    @Query("select s from Station s where s.longitudeWgs84 is not null and s.latitudeWgs84 is not null")
     List<Station> findAll();
 
     @Query("select s from Station s " +
             "where s.network in (:networks) and " +
-            "s.longitudeWgs84 is not null and s.latitudeWgs84 is not null and s.firstMeasureDate is not null")
+            "s.longitudeWgs84 is not null and s.latitudeWgs84 is not null")
     List<Station> findByNetworkCustom(@Param("networks") Collection<String> networks);
 
     Station findOne(Long id);

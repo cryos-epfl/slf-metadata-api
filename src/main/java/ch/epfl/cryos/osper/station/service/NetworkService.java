@@ -6,6 +6,7 @@ import ch.epfl.cryos.osper.station.repository.StationMetadataRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -25,7 +26,9 @@ public class NetworkService {
 
 
     public List<Network> getNetworks() {
-        return networkRepository.findAll();
+        List<Network> networks = networkRepository.findAll();
+        networks.sort(Comparator.comparing(Network::getCode));
+        return networks;
     }
 
 
