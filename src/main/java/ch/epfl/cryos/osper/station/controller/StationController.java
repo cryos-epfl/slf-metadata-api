@@ -49,19 +49,6 @@ public class StationController {
     }
 
 
-//    @ResponseStatus(value = HttpStatus.OK)
-//    @RequestMapping(
-//            value = "stations/{stationName}",
-//            method = RequestMethod.GET,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    @ApiOperation(value = "Get data", notes = "Returns station metadata in GeoJSON format. ", response = String.class)
-//
-//    public Feature getStationInfo(
-//            @PathVariable(value = "stationName") @ApiParam(value = "Station name composed like network:stationName:stationNumber", required = true) String stationName
-//    ) {
-//        return service.getStationInfo(stationName);
-//    }
-
     @ResponseStatus(value = HttpStatus.OK)
     @RequestMapping(
             value = "stations/{stationId}",

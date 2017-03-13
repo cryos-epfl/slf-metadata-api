@@ -1,11 +1,6 @@
 package ch.epfl.cryos.osper.station.controller;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+import ch.epfl.cryos.osper.station.Application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,48 +16,89 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import ch.epfl.cryos.osper.station.Application;
-
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class, loader = SpringApplicationContextLoader.class)
-@TestPropertySource(locations = { "classpath:test.properties" })
-@ActiveProfiles({ "insecure", "test" })
+@TestPropertySource(locations = {"classpath:test.properties"})
+@ActiveProfiles({"insecure", "test"})
 public class StationControllerTest {
 
-	@Autowired
-	private WebApplicationContext context;
+    @Autowired
+    private WebApplicationContext context;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
+    private String STATIONS_PATH = "/metadata";
 
-	@Before
-	public void setUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
-	}
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context).build();
+    }
 
+    @Test
+    public void singleStation() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/stations/721628"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.type", equalTo("Feature")))
+                .andExpect(jsonPath("$.properties.name", equalTo("ALI2")))
+                .andExpect(jsonPath("$.properties.description", equalTo("Chenau 1716 m")))
+        .andDo(print());
+    }
+
+    //ToDo: add error tests
+    //ToDo: add test s for all endpoints
 	@Test
-	public void singleStation() throws Exception {
-		this.mockMvc.perform(get("/metadata/stations/819"))
-			.andExpect(status().is2xxSuccessful())
+    public void stationBadRequest() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/stations/yyy"))
+//                .andDo(print())
+			.andExpect(status().is4xxClientError())
 			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-			.andExpect(jsonPath("$.type",equalTo("Feature")))
-			.andExpect(jsonPath("$.properties.name",equalTo("BOV")))
-			.andExpect(jsonPath("$.properties.number",equalTo(2)))
-				.andExpect(jsonPath("$.properties.description", equalTo("Pointe de Toules 2700 m")));
-	}
+			.andExpect(jsonPath("$.error",equalTo("Bad Request")));
+    }
 
-	//ToDo: add error tests
-	//ToDo: add test s for all endpoints
-//	@Test
-//    public void periodBadRequest() throws Exception {
-//		this.mockMvc.perform(get("/dateExample/period?date=2015-12-01&period=3D"))
-//			.andExpect(status().is4xxClientError())
-//			.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//			.andExpect(jsonPath("$.error",equalTo("Bad Request")));
-//    }
+    @Test
+    public void stationNotFound() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/stations/1"))
+//                .andDo(print())
+                .andExpect(status().is4xxClientError())
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.error",equalTo("Not Found")));
+    }
 
-	
+    @Test
+    public void networks() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/networks"))
+//                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray());
+    }
+
+    @Test
+    public void stationsOfNetworks() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/networks/imis/stations"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.type", equalTo("FeatureCollection")))
+                .andExpect(jsonPath("$.features").isArray())
+                .andExpect(jsonPath("$.features[0].properties.network", equalTo("IMIS")));
+    }
+
+    @Test
+    public void stations() throws Exception {
+        this.mockMvc.perform(get(STATIONS_PATH + "/stations"))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.type", equalTo("FeatureCollection")))
+                .andExpect(jsonPath("$.features").isArray())
+                .andExpect(jsonPath("$.features", hasSize(greaterThan(900))));
+    }
 
 }

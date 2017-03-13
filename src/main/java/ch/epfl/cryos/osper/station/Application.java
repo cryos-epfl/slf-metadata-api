@@ -20,7 +20,6 @@ import org.springframework.core.env.ConfigurableEnvironment;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = ApplicationFields.BASE_SCAN_PACKAGES)
-//@Profile("insecure")
 public class
 		Application extends SpringBootServletInitializer {
 

@@ -3,6 +3,8 @@ package ch.epfl.cryos.osper.station.controller;
 import ch.epfl.cryos.osper.station.ApplicationFields;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -23,7 +25,7 @@ import java.util.Properties;
  */
 @RestController
 @RequestMapping(ApplicationFields.REST_MAPPING_COMPONENT_INFO)
-@Api(value = "REST sdbo-api configuration informations")
+@Api(value = "Stations REST-API configuration information")
 @PropertySources({@PropertySource("classpath:info.properties")})
 public class ComponentInfoController {
 
