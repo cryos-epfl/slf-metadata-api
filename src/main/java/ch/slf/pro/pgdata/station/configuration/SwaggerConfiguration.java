@@ -1,6 +1,6 @@
-package ch.slf.pro.osper.station.configuration;
+package ch.slf.pro.pgdata.station.configuration;
 
-import ch.slf.pro.osper.station.ApplicationFields;
+import ch.slf.pro.pgdata.station.ApplicationFields;
 import ch.slf.pro.common.util.exception.handler.*;
 import ch.slf.pro.common.util.exception.handler.tools.ExceptionTypeDocBuilder;
 import ch.slf.pro.common.util.geo.Crs;

@@ -1,6 +1,6 @@
-package ch.slf.pro.osper.station.repository;
+package ch.slf.pro.pgdata.station.repository;
 
-import ch.slf.pro.osper.station.model.Station;
+import ch.slf.pro.pgdata.station.model.Station;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,6 +1,6 @@
-package ch.slf.pro.osper.station.controller;
+package ch.slf.pro.pgdata.station.controller;
 
-import ch.slf.pro.osper.station.Application;
+import ch.slf.pro.pgdata.station.Application;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

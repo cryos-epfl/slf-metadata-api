@@ -1,4 +1,4 @@
-package ch.slf.pro.osper.station.configuration;
+package ch.slf.pro.pgdata.station.configuration;
 
 import ch.slf.pro.common.util.converter.ConverterConfiguration;
 import ch.slf.pro.common.util.exception.handler.demo.ExceptionDemoConfig;
@@ -81,12 +81,6 @@ public class BeanConfiguration {
     @Bean
     public HibernateJpaSessionFactoryBean sessionFactory() {
         return new HibernateJpaSessionFactoryBean();
-    }
-
-    @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-
     }
 
 

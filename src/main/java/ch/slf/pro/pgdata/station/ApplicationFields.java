@@ -1,4 +1,4 @@
-package ch.slf.pro.osper.station;
+package ch.slf.pro.pgdata.station;
 
 import java.time.ZoneId;
 import java.util.TimeZone;
@@ -17,15 +17,15 @@ public class ApplicationFields {
 
     public static final String SECURITY_BUNDLE = "AVAL";
     public static final String BASE_SCAN_PACKAGES =
-            "ch.epfl.cryos.osper.station.configuration,"
-                    + "ch.epfl.cryos.osper.station.controller,"
-                    + "ch.epfl.cryos.osper.station.repository,"
-                    + "ch.epfl.cryos.osper.station.service"
+            "ch.slf.pro.pgdata.station.configuration,"
+                    + "ch.slf.pro.pgdata.station.controller,"
+                    + "ch.slf.pro.pgdata.station.repository,"
+                    + "ch.slf.pro.pgdata.station.service"
 
             ;
 
-    public static final String[] MODEL_SCAN_PACKAGES = {"ch.epfl.cryos.osper.station.model"};
-    public static final String REPOSITORY_SCAN_PACKAGE = "ch.epfl.cryos.osper.station.repository";
+    public static final String[] MODEL_SCAN_PACKAGES = {"ch.slf.pro.pgdata.station.model"};
+    public static final String REPOSITORY_SCAN_PACKAGE = "ch.slf.pro.pgdata.station.repository";
 
     public static final String REST_MAPPING_COMPONENT_INFO = "/info";
     public static final String REST_METADATA = "/metadata";

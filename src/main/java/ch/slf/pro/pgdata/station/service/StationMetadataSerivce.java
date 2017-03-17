@@ -1,7 +1,7 @@
-package ch.slf.pro.osper.station.service;
+package ch.slf.pro.pgdata.station.service;
 
-import ch.slf.pro.osper.station.model.Station;
-import ch.slf.pro.osper.station.repository.StationMetadataRepository;
+import ch.slf.pro.pgdata.station.model.Station;
+import ch.slf.pro.pgdata.station.repository.StationMetadataRepository;
 import ch.slf.pro.common.util.exception.SlfProRuntimeException;
 import org.geojson.Feature;
 import org.geojson.FeatureCollection;

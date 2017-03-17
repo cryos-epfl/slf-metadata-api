@@ -3,4 +3,4 @@
  * Classes in this package normally extends {@code JpaRepository}
  * and have a 'Repository' name suffix (e.g. ExplosionRepository).
  */
-package ch.slf.pro.osper.station.repository;
+package ch.slf.pro.pgdata.station.repository;

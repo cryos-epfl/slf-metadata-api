@@ -6,7 +6,7 @@
 //	@TypeDef(name="geometry", typeClass=GeometryType.class),
 //	@TypeDef(name="zonedDateTime", typeClass=PersistentZonedDateTime.class)
 //})
-package ch.slf.pro.osper.station.model;
+package ch.slf.pro.pgdata.station.model;
 
 //import org.hibernate.annotations.TypeDef;
 //import org.hibernate.annotations.TypeDefs;

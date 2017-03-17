@@ -1,6 +1,6 @@
-package ch.slf.pro.osper.station.model;
+package ch.slf.pro.pgdata.station.model;
 
-import ch.slf.pro.osper.station.ApplicationFields;
+import ch.slf.pro.pgdata.station.ApplicationFields;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

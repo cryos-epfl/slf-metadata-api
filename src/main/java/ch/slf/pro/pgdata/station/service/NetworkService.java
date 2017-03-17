@@ -1,8 +1,8 @@
-package ch.slf.pro.osper.station.service;
+package ch.slf.pro.pgdata.station.service;
 
-import ch.slf.pro.osper.station.model.Network;
-import ch.slf.pro.osper.station.repository.NetworkRepository;
-import ch.slf.pro.osper.station.repository.StationMetadataRepository;
+import ch.slf.pro.pgdata.station.model.Network;
+import ch.slf.pro.pgdata.station.repository.NetworkRepository;
+import ch.slf.pro.pgdata.station.repository.StationMetadataRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;

@@ -1,4 +1,4 @@
-package ch.slf.pro.osper.station.configuration;
+package ch.slf.pro.pgdata.station.configuration;
 
 import org.springframework.stereotype.Component;
 

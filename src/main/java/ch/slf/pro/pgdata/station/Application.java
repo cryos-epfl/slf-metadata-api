@@ -1,4 +1,4 @@
-package ch.slf.pro.osper.station;
+package ch.slf.pro.pgdata.station;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

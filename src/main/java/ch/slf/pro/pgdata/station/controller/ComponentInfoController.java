@@ -1,6 +1,6 @@
-package ch.slf.pro.osper.station.controller;
+package ch.slf.pro.pgdata.station.controller;
 
-import ch.slf.pro.osper.station.ApplicationFields;
+import ch.slf.pro.pgdata.station.ApplicationFields;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

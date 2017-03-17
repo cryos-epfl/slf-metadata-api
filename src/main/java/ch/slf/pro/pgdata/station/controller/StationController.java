@@ -1,9 +1,9 @@
-package ch.slf.pro.osper.station.controller;
+package ch.slf.pro.pgdata.station.controller;
 
-import ch.slf.pro.osper.station.ApplicationFields;
-import ch.slf.pro.osper.station.model.Network;
-import ch.slf.pro.osper.station.service.NetworkService;
-import ch.slf.pro.osper.station.service.StationMetadataSerivce;
+import ch.slf.pro.pgdata.station.ApplicationFields;
+import ch.slf.pro.pgdata.station.model.Network;
+import ch.slf.pro.pgdata.station.service.NetworkService;
+import ch.slf.pro.pgdata.station.service.StationMetadataSerivce;
 import com.google.common.collect.Sets;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
